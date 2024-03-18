@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Returns the assigned Service Resource for the specified Service Appointment</description>
+    <interviewLabel>Chronos Bot - Get Assigned Service Resource {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Chronos Bot - Get Assigned Service Resource</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Assigned_Resource</name>
+        <label>Get Assigned Resource</label>
+        <locationX>234</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_ServiceResource</targetReference>
+        </connector>
+        <filters>
+            <field>ServiceAppointmentId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>rvarServiceAppointment.Id</elementReference>
+            </value>
+        </filters>
+        <object>AssignedResource</object>
+        <outputAssignments>
+            <assignToReference>varServiceResourceId</assignToReference>
+            <field>ServiceResourceId</field>
+        </outputAssignments>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_ServiceResource</name>
+        <label>Get ServiceResource</label>
+        <locationX>441</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varServiceResourceId</elementReference>
+            </value>
+        </filters>
+        <object>ServiceResource</object>
+        <outputReference>rvarServiceResource</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+    </recordLookups>
+    <startElementReference>Get_Assigned_Resource</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>rvarServiceAppointment</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ServiceAppointment</objectType>
+    </variables>
+    <variables>
+        <name>rvarServiceResource</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>ServiceResource</objectType>
+    </variables>
+    <variables>
+        <name>varServiceResourceId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

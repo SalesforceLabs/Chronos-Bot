@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Returns a list of Service Resources for the specified Service Territory</description>
+    <interviewLabel>Chronos Bot - Get Service Territory Members {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Chronos Bot - Get Service Territory Members</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Service_Territory_Member</name>
+        <label>Get Service Territory Member</label>
+        <locationX>254</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <filters>
+            <field>ServiceTerritoryId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>rvarServiceTerritory.Id</elementReference>
+            </value>
+        </filters>
+        <object>ServiceTerritoryMember</object>
+        <outputReference>colServiceTerritoryMembers</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>ServiceResourceId</queriedFields>
+        <queriedFields>Service_Resource_Name__c</queriedFields>
+    </recordLookups>
+    <startElementReference>Get_Service_Territory_Member</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>colServiceTerritoryMembers</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+        <objectType>ServiceTerritoryMember</objectType>
+    </variables>
+    <variables>
+        <name>rvarServiceTerritory</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>ServiceTerritory</objectType>
+    </variables>
+</Flow>
